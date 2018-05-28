@@ -1,11 +1,18 @@
-service: serverless-environment-variables
+service: env-variable-service
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
 
 provider:
   name: aws
-  runtime: nodejs4.3
+  runtime: nodejs6.10
+
+# you can define service wide environment variables here
   environment:
-    MY_APP_VAR: tiger
-    SECRET_VAR: ${file(./serverless.env.yml):${opt:stage}.SECRET_APP_VAR}
+    MY_VAR: Lion
+ #   MYSECRET_VAR: ${file(./serverless.env.yml):dev.MYSECRET_VAR}
+    MYSECRET_VAR: ${file(./serverless.env.yml):${opt:stage}.MYSECRET_VAR}
 
 functions:
   hello:
