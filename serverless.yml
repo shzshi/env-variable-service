@@ -1,0 +1,12 @@
+service: serverless-environment-variables
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  environment:
+    MY_APP_VAR: tiger
+    SECRET_VAR: ${file(./serverless.env.yml):${opt:stage}.SECRET_APP_VAR}
+
+functions:
+  hello:
+    handler: handler.hello
